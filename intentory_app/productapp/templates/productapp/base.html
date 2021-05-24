@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html>
+<head>
+  {% if title %}
+    <title> product - {{title}}</title>
+  {% else %}
+    <title> home </title>
+  {% endif %}
+  
+</head>
+<body>
+  {% block content %}
+  {% endblock %}
+</body>
+</html>
