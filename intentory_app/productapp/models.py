@@ -7,6 +7,7 @@ class product(models.Model):
 	product_name=models.CharField(max_length=100)
 	date_created=models.DateTimeField(auto_now_add=True)
 	seller=models.CharField(max_length=100)
+	product_detail=models.CharField(max_length=9999, default="")
 	#seller=models.ForeignKey(User, on_delete=models.CASCADE)
 
 

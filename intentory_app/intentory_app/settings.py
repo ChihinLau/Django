@@ -25,13 +25,16 @@ SECRET_KEY = 'django-insecure-wius2aa3eccai#7gd(r5bk0_xc33+)*6j(51qzs_i9=z7bx)j2
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
+
 ALLOWED_HOSTS = []
+#ALLOWED_HOSTS = ["localhost:3306"]
 
 
 # Application definition
 
 INSTALLED_APPS = [
     'productapp.apps.ProductappConfig',
+    'users.apps.UsersConfig',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -80,7 +83,17 @@ DATABASES = {
         'NAME': BASE_DIR / 'db.sqlite3',
     }
 }
+"""
 
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.mysql',
+        'OPTIONS': {
+            'read_default_file': '/Users/darkdarkb/desktop/train/django/intentory_app/my.cnf',
+        },
+    }
+}
+"""
 
 # Password validation
 # https://docs.djangoproject.com/en/3.2/ref/settings/#auth-password-validators
@@ -119,6 +132,8 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/3.2/howto/static-files/
 
 STATIC_URL = '/static/'
+
+LOGIN_REDIRECT_URL = "product-home"
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/3.2/ref/settings/#default-auto-field

@@ -19,13 +19,16 @@ products=[
 
 ]
 """
+
 product.objects.filter(product_id=1).delete()
 product.objects.filter(product_id=2).delete()
-product1 = product.objects.create(product_id=1, product_name="cola", date_created=timezone.now(), seller="Tom")
+product1 = product.objects.create(product_id=1, product_name="cola", date_created=timezone.now(), seller="Tom", product_detail="It is cola")
 product1.product_name="Steak"
-product2 = product.objects.create(product_id=2, product_name="Fish", date_created=timezone.now(), seller="Sam")
+product1.product_detail="It is steak"
+product2 = product.objects.create(product_id=2, product_name="Fish", date_created=timezone.now(), seller="Sam", product_detail="It is fish")
 product1.save()
 product2.save()
+
 
 def home(request):
 	#return HttpResponse("<h1>product home</h1>")
@@ -37,4 +40,4 @@ def home(request):
 
 def about(request):
 	#return HttpResponse("<h1>product about</h1>")
-	return render(request, "productapp/about.html")
+	return render(request, "productapp/about.html", {"title":"about"})

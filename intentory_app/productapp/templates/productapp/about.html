@@ -1,13 +1,4 @@
-<!DOCTYPE html>
-<html>
-<head>
-  {% if title %}
-    <title> {{title}}</title>
-  {% else %}
-    <title> about</title>
-  {% endif %}
-</head>
-<body>
-  <h1>Product about</h1>
-</body>
-</html>
+{% extends "productapp/base.html" %}
+{% block content %}
+  <h1>about</h1>
+{% endblock content %}

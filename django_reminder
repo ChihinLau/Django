@@ -2,7 +2,7 @@ create:python3 -m venv env
 activate:source env/bin/activate
 create project: django-admin.py startproject [project name]
 useful command:
-python manage.py migrate
+python manage.py migratepython
 python manage.py createsuperuser
 python manage.py startapp
 

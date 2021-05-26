@@ -1,17 +1,8 @@
-<!DOCTYPE html>
-<html>
-<head>
-  {% if title %}
-    <title> {{title}}</title>
-  {% else %}
-    <title> product home </title>
-  {% endif %}
-  
-</head>
-<body>
+{% extends "productapp/base.html" %}
+{% block content %}
   {% for product in products %}
     <h1>{{ product.product_id }} {{ product.product_name }}</h1>
     <p>Sell by {{ product.seller }} on {{product.date_created}}</p>
+    <p>Detail:{{ product.product_detail }} </p>
   {% endfor %}
-</body>
-</html>
+{% endblock content %}
