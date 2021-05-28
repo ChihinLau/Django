@@ -1,8 +1,15 @@
 {% extends "productapp/base.html" %}
 {% block content %}
   {% for product in products %}
-    <h1>{{ product.product_id }} {{ product.product_name }}</h1>
-    <p>Sell by {{ product.seller }} on {{product.date_created}}</p>
-    <p>Detail:{{ product.product_detail }} </p>
-  {% endfor %}
+        <article class="media content-section">
+          <div class="media-body">
+            <div class="article-metadata">
+              Product id:" {{ product.product_id }}
+              <small class="text-muted">{{ product.date_created|date:"F d, Y" }}</small>
+            </div>
+            <h2><a class="article-title" href="{% url 'product-detail' product.product_id %}">{{ product.product_name }}</a></h2>
+            <p class="article-content">{{ product.product_detail }}</p>
+          </div>
+        </article>
+    {% endfor %}
 {% endblock content %}

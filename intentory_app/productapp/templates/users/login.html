@@ -4,7 +4,7 @@
   	<form method="POST">
   		{% csrf_token %}
   		<fieldset class="form-group">
-  			<legend class="border-bttom mb-4">Join Today</legend>
+  			<legend class="border-bttom mb-4">Join Today From productapp</legend>
   			{{ form.as_p }}
   		</fieldset>
   		<div class="form-group">
@@ -12,7 +12,7 @@
   		</div>	
   	</form>
   	<div class="border-top pt-3">
-  		<small class="text-muted"> Regester <a class="ml-2", href="{% url "register" %}"> Sign up</a>
+  		<small class="text-muted"> Regester? <a class="ml-2", href="{% url "register" %}"> Sign up</a>
   		</small>
   	</div>
   </div>

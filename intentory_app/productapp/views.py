@@ -3,6 +3,8 @@ from django.http import HttpResponse
 from .models import product
 from django.utils import timezone
 from django.contrib.auth.models import User
+from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
+from django.contrib.auth.mixins import LoginRequiredMixin
 # Create your views here.
 """
 products=[
@@ -30,6 +32,7 @@ product1.save()
 product2.save()
 
 
+
 def home(request):
 	#return HttpResponse("<h1>product home</h1>")
 	context = {
@@ -41,3 +44,34 @@ def home(request):
 def about(request):
 	#return HttpResponse("<h1>product about</h1>")
 	return render(request, "productapp/about.html", {"title":"about"})
+
+
+class ProductListView(ListView):
+	model = product
+	template_name = "productapp/home.html"
+	context_object_name = "products"
+	ordering = ["product_id"]
+
+class ProductDetailView(DetailView):
+	model = product
+	template_name = "productapp/product_detail.html"
+
+#class ProductCreateView(LoginRequiredMixin, CreateView):
+class ProductCreateView( CreateView):
+	model = product
+	template_name = "productapp/product_create.html"
+	fields = ["product_id", "product_name", "product_detail" ]
+	#def product_valid(self, form): # set seller to the user
+	#	form.instance.seller = self.request.user
+	#	return super().product_valid(form)
+
+class ProductUpdateView(UpdateView):
+	model = product
+	template_name = "productapp/product_create.html"
+	fields = ["product_id", "product_name", "product_detail" ]
+
+class ProductDeleteView(DeleteView):
+	model = product
+	template_name = "productapp/product_delete.html"
+	success_url="/"
+

@@ -4,15 +4,15 @@
   	<form method="POST">
   		{% csrf_token %}
   		<fieldset class="form-group">
-  			<legend class="border-bttom mb-4">Join Today</legend>
-  			{{ form }}
+  			<legend class="border-bttom mb-4">Sign Up</legend>
+  			{{ form.as_p }}
   		</fieldset>
   		<div class="form-group">
   			<button class="btn btn-outline-info" type="submit"> Sign Up</button>
   		</div>	
   	</form>
   	<div class="border-top pt-3">
-  		<small class="text-muted"> Already Have An Account? <a class="ml-2", href="#"> Sign In</a> <!-- use login view to redirect the user to -->
+  		<small class="text-muted"> Already had an account?<a class="ml-2", href="{% url "login" %}"> Sign In</a>
   		</small>
   	</div>
   </div>
