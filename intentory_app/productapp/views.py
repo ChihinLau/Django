@@ -4,7 +4,7 @@ from .models import product
 from django.utils import timezone
 from django.contrib.auth.models import User
 from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
-from django.contrib.auth.mixins import LoginRequiredMixin
+from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 # Create your views here.
 """
 products=[
@@ -21,7 +21,7 @@ products=[
 
 ]
 """
-
+"""
 product.objects.filter(product_id=1).delete()
 product.objects.filter(product_id=2).delete()
 product1 = product.objects.create(product_id=1, product_name="cola", date_created=timezone.now(), seller="Tom", product_detail="It is cola")
@@ -30,7 +30,7 @@ product1.product_detail="It is steak"
 product2 = product.objects.create(product_id=2, product_name="Fish", date_created=timezone.now(), seller="Sam", product_detail="It is fish")
 product1.save()
 product2.save()
-
+"""
 
 
 def home(request):
@@ -57,21 +57,39 @@ class ProductDetailView(DetailView):
 	template_name = "productapp/product_detail.html"
 
 #class ProductCreateView(LoginRequiredMixin, CreateView):
-class ProductCreateView( CreateView):
+class ProductCreateView(LoginRequiredMixin, CreateView):
+	login_url = '/login/'
+    #redirect_field_name = 'home'
 	model = product
 	template_name = "productapp/product_create.html"
-	fields = ["product_id", "product_name", "product_detail" ]
-	#def product_valid(self, form): # set seller to the user
-	#	form.instance.seller = self.request.user
-	#	return super().product_valid(form)
+	fields = ["product_name", "product_detail" ]
+	def form_valid(self, form): # set seller to the user
+		form.instance.seller = self.request.user
+		return super().form_valid(form)
 
-class ProductUpdateView(UpdateView):
+class ProductUpdateView(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
 	model = product
 	template_name = "productapp/product_create.html"
-	fields = ["product_id", "product_name", "product_detail" ]
+	fields = ["product_name", "product_detail" ]
+	def form_valid(self, form): # set seller to the user
+		form.instance.seller = self.request.user
+		return super().form_valid(form)
+	def test_func(self):
+		product=self.get_object()
+		if self.request.user == product.seller:
+			return True
+		return False
 
-class ProductDeleteView(DeleteView):
+class ProductDeleteView(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
 	model = product
 	template_name = "productapp/product_delete.html"
 	success_url="/"
+	def form_valid(self, form): # set seller to the user
+		form.instance.seller = self.request.user
+		return super().form_valid(form)
+	def test_func(self):
+		product=self.get_object()
+		if self.request.user == product.seller:
+			return True
+		return False
 

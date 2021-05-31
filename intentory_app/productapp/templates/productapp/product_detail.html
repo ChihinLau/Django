@@ -4,7 +4,7 @@
           <div class="media-body">
             <div class="article-metadata">
               <a class="mr-2" href="#">{{ object.product_id }}</a>
-              <small class="text-muted">{{ object.date_created|date:"F d, Y" }}</small>
+              <small class="text-muted">{{ object.date_created|date:"F d, Y" }} sell by {{ object.seller }}</small>
             </div>
             <h2> {{ object.product_name }} </h2>
             <p class="article-content">{{ object.product_detail }}</p>
