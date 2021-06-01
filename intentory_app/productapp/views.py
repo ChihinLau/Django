@@ -62,7 +62,7 @@ class ProductCreateView(LoginRequiredMixin, CreateView):
     #redirect_field_name = 'home'
 	model = product
 	template_name = "productapp/product_create.html"
-	fields = ["product_name", "product_detail" ]
+	fields = ["product_name", "product_detail", "product_image" ]
 	def form_valid(self, form): # set seller to the user
 		form.instance.seller = self.request.user
 		return super().form_valid(form)
@@ -70,7 +70,7 @@ class ProductCreateView(LoginRequiredMixin, CreateView):
 class ProductUpdateView(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
 	model = product
 	template_name = "productapp/product_create.html"
-	fields = ["product_name", "product_detail" ]
+	fields = ["product_name", "product_detail", "product_image" ]
 	def form_valid(self, form): # set seller to the user
 		form.instance.seller = self.request.user
 		return super().form_valid(form)

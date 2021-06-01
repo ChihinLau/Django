@@ -1,6 +1,8 @@
 from . import views
 from .views import ProductListView, ProductDetailView, ProductCreateView, ProductUpdateView, ProductDeleteView
 from django.urls import path, include
+from django.conf import settings
+from django.conf.urls.static import static
 #app_name="productapp"
 
 urlpatterns = [
@@ -11,3 +13,5 @@ urlpatterns = [
 	path("product/create/", ProductCreateView.as_view(), name="product-create"),
     path("about/", views.about, name="product-about"),
 ]
+if settings.DEBUG:
+     urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

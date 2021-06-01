@@ -7,6 +7,8 @@
               <small class="text-muted">{{ object.date_created|date:"F d, Y" }} sell by {{ object.seller }}</small>
             </div>
             <h2> {{ object.product_name }} </h2>
+            <img src="{{object.product_image.url}}"  width="250" height="250">
+            <br />
             <p class="article-content">{{ object.product_detail }}</p>
           </div>
     </article>

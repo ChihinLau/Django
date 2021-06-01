@@ -10,6 +10,7 @@ class product(models.Model):
 	#seller=models.CharField(max_length=100)
 	product_detail=models.CharField(max_length=9999, default="")
 	seller=models.ForeignKey(User, on_delete=models.CASCADE)
+	product_image=models.ImageField(default="default.jpg", upload_to="product_image")
 
 	def __str__(self):
 		return self.title
