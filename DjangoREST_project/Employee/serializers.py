@@ -5,7 +5,7 @@ from .models import employee
 class EmployeeSerializer(serializers.ModelSerializer):
 	class Meta:
 		model = employee
-		fields = ["First_name", "Last_name", "Department", "Salary"]
+		fields = ["employee_id", "First_name", "Last_name", "Department", "Salary"]
 """
 class EmployeeSerializer(serializers.Serializer):
 	#id=serializers.IntegerField(primary_key = True)
