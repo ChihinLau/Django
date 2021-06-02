@@ -11,9 +11,10 @@ class product(models.Model):
 	product_detail=models.CharField(max_length=9999, default="")
 	seller=models.ForeignKey(User, on_delete=models.CASCADE)
 	product_image=models.ImageField(default="default.jpg", upload_to="product_image")
+	catetgory = models.CharField(max_length=999, default="None")
 
 	def __str__(self):
-		return self.title
+		return self.product_name
 
 	def get_absolute_url(self):
 		return reverse("product-detail", kwargs={"pk": self.pk})
