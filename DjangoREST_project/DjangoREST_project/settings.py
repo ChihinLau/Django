@@ -39,6 +39,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'rest_framework',
     'Employee.apps.EmployeeConfig',
+    'Talk_app.apps.TalkAppConfig',
 ]
 
 MIDDLEWARE = [

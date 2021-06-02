@@ -1,10 +1,11 @@
 from rest_framework import serializers
-from .models import employee
+from .models import talkModel
 
-class EmployeeSerializer(serializers.ModelSerializer):
+#ID, Name, Speaker, Venue, Duration
+class TalkSerializer(serializers.ModelSerializer):
 	class Meta:
-		model = employee
-		fields = ["employee_id", "First_name", "Last_name", "Department", "Salary"]
+		model = talkModel
+		fields = ["ID", "Name", "Speaker", "Venue", "Duration"]
 """
 class EmployeeSerializer(serializers.Serializer):
 	#id=serializers.IntegerField(primary_key = True)
