@@ -31,6 +31,11 @@ product2 = product.objects.create(product_id=2, product_name="Fish", date_create
 product1.save()
 product2.save()
 """
+from utils import get_db_handle, get_collection_handle
+db_handle, mongo_client = get_db_handle("django", "localhost", 27017, "darkdarkb", "gundamrx782")
+collection_handle = get_collection_handle(db_handle, "productapp_product")
+#collection_handle.insert( { product_name: "card", product_detail: "15" } )
+
 
 
 def home(request):
@@ -45,6 +50,14 @@ def about(request):
 	#return HttpResponse("<h1>product about</h1>")
 	return render(request, "productapp/about.html", {"title":"about"})
 
+class CategoryListView(ListView):
+	template_name = "productapp/category.html"
+	context_object_name = "products"
+	def get_queryset(self):
+		content = {
+			"cate":self.kwargs["category"],
+			"products":product.objects.filter(category__name=self.kwargs["category"]).filter(status="published")
+		}
 
 class ProductListView(ListView):
 	model = product
@@ -62,7 +75,7 @@ class ProductCreateView(LoginRequiredMixin, CreateView):
     #redirect_field_name = 'home'
 	model = product
 	template_name = "productapp/product_create.html"
-	fields = ["product_name", "product_detail", "product_image" ]
+	fields = ["product_name", "product_detail", "product_image", "catetgory" ]
 	def form_valid(self, form): # set seller to the user
 		form.instance.seller = self.request.user
 		return super().form_valid(form)
@@ -70,7 +83,7 @@ class ProductCreateView(LoginRequiredMixin, CreateView):
 class ProductUpdateView(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
 	model = product
 	template_name = "productapp/product_create.html"
-	fields = ["product_name", "product_detail", "product_image" ]
+	fields = ["product_name", "product_detail", "product_image", "catetgory" ]
 	def form_valid(self, form): # set seller to the user
 		form.instance.seller = self.request.user
 		return super().form_valid(form)

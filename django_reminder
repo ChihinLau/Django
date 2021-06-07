@@ -6,7 +6,7 @@ source env2/bin/activate
 
 create project: django-admin.py startproject [project name]
 useful command:
-python manage.py migratepython
+python manage.py migrate
 python manage.py createsuperuser
 python manage.py startapp
 
@@ -15,3 +15,19 @@ python manage.py sqlmigrate [app name] [num]
 python manage.py migrate
 
 python manage.py shell
+
+brew services start mongodb-community@4.4
+brew services stop mongodb-community@4.4
+
+db.createUser(
+  {
+    user: "darkdarkb",
+    pwd: "gundamrx782",
+    roles: [
+       { role: "readWrite", db: "admin" },
+       { role: "readWrite", db: "config" },
+       { role: "readWrite", db: "local" },
+       { role: "readWrite", db: "django" }
+    ]
+  }
+)
